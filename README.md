@@ -1,2 +1,16 @@
-# mmpremium-bot
-Telegram bot for calculating star prices and sending links
+# Telegram Bot: Звёзды → Сум
+
+Простой Telegram-бот, который считает сумму за количество звёзд.
+
+## Как работает
+
+1. Отправь боту число звёзд.
+2. Бот вернёт сумму в сум (50 звёзд = 14 000 сум).
+
+## Запуск на Render
+
+1. Создай переменную окружения `BOT_TOKEN` с токеном бота.
+2. Build Command: `pip install -r requirements.txt`
+3. Start Command: `python bot.py`
+
+Бот будет работать 24/7.
