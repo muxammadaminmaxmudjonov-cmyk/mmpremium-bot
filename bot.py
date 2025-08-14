@@ -8,7 +8,7 @@ bot = telebot.TeleBot(TOKEN)
 
 # Удаляем вебхук и старые сессии polling
 bot.remove_webhook()
-time.sleep(1)  # небольшой тайм-аут, чтобы Telegram успел обработать удаление вебхука
+time.sleep(1)
 bot.stop_polling()
 
 PRICE_PER_STAR = 280  # 1 звезда = 280 сум
@@ -23,7 +23,7 @@ def reply_one(message):
 def reply_two(message):
     bot.reply_to(message, "https://t.me/mmpremiumm/10")
 
-# Если введено число >50 — считаем цену
+# Обработчик для чисел >50
 @bot.message_handler(func=lambda m: m.text and m.text.strip().isdigit() and int(m.text.strip()) > 50)
 def reply_price(message):
     stars = int(message.text.strip())
@@ -31,4 +31,11 @@ def reply_price(message):
     bot.reply_to(message, f"{price:,} сум".replace(",", " "))
 
 print("Бот запущен и работает 24/7...")
-bot.infinity_polling()
+
+# Infinity polling с автоматическим перезапуском при ошибках
+while True:
+    try:
+        bot.infinity_polling(timeout=10, long_polling_timeout=5)
+    except Exception as e:
+        print(f"Ошибка: {e}, перезапуск через 5 секунд")
+        time.sleep(5)
