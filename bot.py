@@ -6,9 +6,9 @@ import time
 TOKEN = os.getenv("TOKEN")
 bot = telebot.TeleBot(TOKEN)
 
-# Удаляем вебхук и старые сессии polling
+# Удаляем старый вебхук и старые polling сессии
 bot.remove_webhook()
-time.sleep(1)
+time.sleep(1)  # ждём, чтобы Telegram успел обработать
 bot.stop_polling()
 
 PRICE_PER_STAR = 280  # 1 звезда = 280 сум
