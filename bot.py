@@ -1,10 +1,11 @@
+import os
 import telebot
 
-# ВАШ ТОКЕН
-TOKEN = "8326581351:AAEj3wqCMQpQO2SLX_kX0XqLJnxG8p8ZFDI"
+# Берём токен из переменной окружения Railway
+TOKEN = os.getenv("TOKEN")
 bot = telebot.TeleBot(TOKEN)
 
-PRICE_PER_STAR = 280  # 1 звезда = 280 сум (так как 50 звезд = 14,000)
+PRICE_PER_STAR = 280  # 1 звезда = 280 сум
 
 # Ответ на сообщение "1"
 @bot.message_handler(func=lambda m: m.text and m.text.strip() == "1")
@@ -21,7 +22,7 @@ def reply_two(message):
 def reply_price(message):
     stars = int(message.text.strip())
     price = stars * PRICE_PER_STAR
-    bot.reply_to(message, f"{price:,} сум".replace(",", " "))  # форматируем с пробелами
+    bot.reply_to(message, f"{price:,} сум".replace(",", " "))
 
 print("Бот запущен и работает 24/7...")
-bot.infinity_polling()  # работает без остановки
+bot.infinity_polling()
