@@ -1,11 +1,15 @@
 import os
 import telebot
 
-# Берём токен из переменной окружения Railway
 TOKEN = os.getenv("TOKEN")
 bot = telebot.TeleBot(TOKEN)
 
-PRICE_PER_STAR = 280  # 1 звезда = 280 сум
+# Удаляем вебхук, чтобы polling заработал
+bot.remove_webhook()
+
+PRICE_PER_STAR = 280
+
+# далее твой код бота... # 1 звезда = 280 сум
 
 # Ответ на сообщение "1"
 @bot.message_handler(func=lambda m: m.text and m.text.strip() == "1")
